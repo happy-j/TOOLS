@@ -14,9 +14,6 @@ pip3 install ansible
 # Terminator
 apt install -y terminator
 
-# Nautilus
-apt install -y nautilus
-
 # Sublime
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
 apt install -y apt-transport-https
