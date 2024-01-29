@@ -6,6 +6,11 @@
     state: present
   become: true
   become_method: sudo
+- name: Ensure .config/terminator directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/.config/terminator"
+    state: directory
+    mode: '0755'
 - name: "Copy Terminator Config"
   copy:
     src: "{{ role_path }}/files/config"
