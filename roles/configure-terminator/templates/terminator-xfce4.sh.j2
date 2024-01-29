@@ -1,0 +1,32 @@
+#!/bin/bash
+
+CONFIG_FILE="$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml"
+BACKUP_FILE="$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml.bak"
+
+# Back up the original configuration file
+cp "$CONFIG_FILE" "$BACKUP_FILE"
+
+# Define the entry to insert
+TERMINATOR_ENTRY='<value type="string" value="terminator.desktop"/>'
+
+# Check if the Terminator entry already exists
+if grep -q "$TERMINATOR_ENTRY" "$CONFIG_FILE"; then
+    echo "Terminator entry already exists in the panel."
+else
+    # Use awk to insert the entry if it doesn't exist
+    awk -v terminator="$TERMINATOR_ENTRY" '
+        /<property name="plugin-7" type="string" value="launcher">/,/<\/property>/ {
+            print
+            if (/type="array"/ && !inserted) {
+                print "        " terminator
+                inserted=1
+            }
+            next
+        }
+        { print }
+    ' "$BACKUP_FILE" > "$CONFIG_FILE"
+
+    # Restart XFCE panel to apply changes
+    xfce4-panel --restart
+fi
+

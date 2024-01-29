@@ -1,0 +1,14 @@
+---
+- name: Setup Kali Machine
+  hosts: localhost
+  connection: local
+  tasks:
+  - name: "Demo Info"
+    debug:
+      var: ansible_facts
+  - name: "Demo Info Variable"
+    debug:
+      msg: "{{ ansible_env.HOME }}"
+  roles:
+    - role: "roles/configure-terminator"
+

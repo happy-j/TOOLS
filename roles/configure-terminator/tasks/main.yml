@@ -1,0 +1,20 @@
+---
+# tasks file for configure-terminator
+- name: Install Terminator
+  apt:
+    name: terminator
+    state: present
+  become: true
+  become_method: sudo
+- name: "Copy Terminator Config"
+  copy:
+    src: "{{ role_path }}/files/config"
+    dest: "{{ ansible_env.HOME }}/.config/terminator/config"
+- name: "Copy XFCE Panel Modification Script"
+  template:
+    src: "terminator-xfce4.sh.j2"
+    dest: "/tmp/terminator-xfce4.sh"
+    mode: '0755'
+- name: "Execute XFCE Panel Modification Script"
+  command: "/tmp/terminator-xfce4.sh"
+  become: false
