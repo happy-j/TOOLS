@@ -38,3 +38,5 @@ apt install -y seclists
 # WinPEAS and LinPEAS
 git clone https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite.git
 
+# Install ligolo-ng (port forward tool)
+git clone https://github.com/nicocha30/ligolo-ng
