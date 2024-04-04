@@ -8,6 +8,12 @@ apt update -y && apt full-upgrade -y
 
 cd /opt
 
+# Python Tools Check
+apt install python3
+apt install python3-pip
+apt install pipx git
+pipx ensurepath
+
 # Ansible 
 pip3 install ansible
 
@@ -40,3 +46,11 @@ git clone https://github.com/carlospolop/privilege-escalation-awesome-scripts-su
 
 # Install ligolo-ng (port forward tool)
 git clone https://github.com/nicocha30/ligolo-ng
+
+# Autorecon
+apt install curl dnsrecon enum4linux feroxbuster gobuster impacket-scripts nbtscan nikto nmap onesixtyone oscanner redis-tools smbclient smbmap snmp sslscan sipvicious tnscmd10g whatweb wkhtmltopdf
+python3 -m pip install git+https://github.com/Tib3rius/AutoRecon.git
+
+# NetExec / nxc
+pipx install git+https://github.com/Pennyw0rth/NetExec
+
